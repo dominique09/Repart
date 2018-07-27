@@ -8,5 +8,13 @@ namespace Repart.Common.Events.Identity
     {
         public Guid Id { get; }
         public string Name { get; }
+
+        protected Role(){}
+
+        public Role(Guid id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }

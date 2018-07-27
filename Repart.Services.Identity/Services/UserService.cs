@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,9 @@ using Repart.Common.Exceptions;
 using Repart.Services.Identity.Domain.Models;
 using Repart.Services.Identity.Domain.Repositories;
 using Repart.Services.Identity.Domain.Services;
-using User = Repart.Common.Events.Identity.User;
+using Role = Repart.Services.Identity.Domain.Models.Role;
+using RoleEvent = Repart.Common.Events.Identity.Role;
+using UserEvent = Repart.Common.Events.Identity.User;
 
 namespace Repart.Services.Identity.Services
 {
@@ -31,7 +34,7 @@ namespace Repart.Services.Identity.Services
             this._jwtHandler = _jwtHandler;
         }
 
-        public async Task<User> RegisterAsync(string email, string password, string name, IEnumerable<Guid> roles)
+        public async Task<UserEvent> RegisterAsync(string email, string password, string name, IEnumerable<Guid> roles)
         {
             var user = await _userRepository.GetAsync(email);
             if(user != null)
@@ -49,7 +52,7 @@ namespace Repart.Services.Identity.Services
             user.SetPassword(password, _encrypter);
             await _userRepository.AddAsync(user);
 
-            return new User(user.Email, user.Name, user.Roles, user.CreatedAt);
+            return new UserEvent(user.Email, user.Name, GetRoles(user.Roles), user.CreatedAt);
         }
 
         public async Task<JsonWebToken> LoginAsync(string email, string password)
@@ -68,7 +71,7 @@ namespace Repart.Services.Identity.Services
             return _jwtHandler.Create(user.Id, roles);
         }
 
-        public async Task<User> AddToRole(Guid userId, Guid roleId)
+        public async Task<UserEvent> AddToRole(Guid userId, Guid roleId)
         {
             var user = await _userRepository.GetAsync(userId);
             if(user == null)
@@ -82,10 +85,10 @@ namespace Repart.Services.Identity.Services
 
             await _userRepository.ModifyAsync(user.AddRole(roleId));
 
-            return new User(user.Email, user.Name, user.Roles, user.CreatedAt);
+            return new UserEvent(user.Email, user.Name, GetRoles(user.Roles), user.CreatedAt);
         }
 
-        public async Task<User> RemoveFromRole(Guid userId, Guid roleId)
+        public async Task<UserEvent> RemoveFromRole(Guid userId, Guid roleId)
         {
             var user = await _userRepository.GetAsync(userId);
             if(user == null)
@@ -99,17 +102,23 @@ namespace Repart.Services.Identity.Services
 
             await _userRepository.ModifyAsync(user.RemoveRole(roleId));
 
-            return new User(user.Email, user.Name, user.Roles, user.CreatedAt);
+            return new UserEvent(user.Email, user.Name, GetRoles(user.Roles), user.CreatedAt);
         }
 
-        public async Task<User> GetAsync(Guid userId)
+        public async Task<UserEvent> GetAsync(Guid userId)
         {
             var user = await _userRepository.GetAsync(userId);
             if(user == null)
                 throw new RepartException("user_not_found",
                     $"Usager non trouvé. ({userId})");
 
-            return new User(user.Email, user.Name, user.Roles, user.CreatedAt);
+            return new UserEvent(user.Email, user.Name, GetRoles(user.Roles), user.CreatedAt);
         }
+
+        private IEnumerable<RoleEvent> GetRoles(IEnumerable<Guid> roleIds)
+            => roleIds
+                .Select(roleId => _roleRepository.GetAsync(roleId).Result)
+                .Select(r => new RoleEvent(r.Id, r.Name));
+        
     }
 }
