@@ -31,11 +31,15 @@ namespace Repart.Services.Identity.Controllers
 
         [HttpGet("users")]
         public async Task<IActionResult> GetAllUsers()
-            => Json(await _userRepository.GetAll());
+            => Json(await _userService.GetAll());
 
         [HttpGet("user/{id}")]
         public async Task<IActionResult> GetUser(Guid id)
             => Json(await _userService.GetAsync(id));
+        
+        [HttpGet("user/toggle-active/{id}")]
+        public async Task<IActionResult> ToggleActive(Guid id)
+            => Json(await _userService.ToggleActive(id));
 
         [HttpGet("roles")]
         public async Task<IActionResult> GetAll()

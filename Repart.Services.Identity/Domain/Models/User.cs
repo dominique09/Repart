@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Repart.Common.Exceptions;
 using Repart.Services.Identity.Domain.Services;
 
@@ -15,6 +13,7 @@ namespace Repart.Services.Identity.Domain.Models
         public string Password { get; protected set; }
         public string Salt { get; protected set; }
         public string Name { get; protected set; }
+        public bool Active { get; protected set; }
         public List<Guid> Roles { get; protected set;}
         public DateTime CreatedAt { get; protected set; }
 
@@ -39,6 +38,7 @@ namespace Repart.Services.Identity.Domain.Models
             Id = Guid.NewGuid();
             Email = email.ToLowerInvariant();
             Name = name;
+            Active = true;
             Roles = new List<Guid>(roles);
             CreatedAt = DateTime.UtcNow;
         }
@@ -85,5 +85,8 @@ namespace Repart.Services.Identity.Domain.Models
 
         public bool ValidatePassword(string password, IEncrypter encrypter)
             => Password.Equals(encrypter.GetHash(password, Salt));
+
+        public void ToggleActive()
+            => Active = !Active;
     }
 }

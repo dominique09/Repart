@@ -14,5 +14,9 @@ namespace Repart.Services.Identity.Services
         Task<User> AddToRole(Guid userId, Guid roleId);
         Task<User> RemoveFromRole(Guid userId, Guid roleId);
         Task<User> GetAsync(Guid userId);
+        Task<IEnumerable<User>> GetAll();
+
+        Task<User> ToggleActive(Guid userId);
+        
     }
 }
