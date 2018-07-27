@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  repart.services.identity:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
