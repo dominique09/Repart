@@ -77,7 +77,7 @@ namespace Repart.Services.Identity.Services
         public async Task<UserEvent> RemoveFromRole(Guid userId, Guid roleId)
         {
             var user = await FindUser(userId);
-            var role = await FindRole(roleId);
+            await FindRole(roleId);
 
             await _userRepository.ModifyAsync(user.RemoveRole(roleId));
             return MapUser(user);
