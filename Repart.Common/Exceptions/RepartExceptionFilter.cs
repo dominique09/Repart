@@ -8,14 +8,16 @@ namespace Repart.Common.Exceptions
         public void OnException(ExceptionContext context)
         {
             if (context.Exception.GetType() != typeof(RepartException)) return;
-
-            var response = new ErrorResponse()
+            
+            var ex = (RepartException)context.Exception;
+            
+            context.Result = new ObjectResult(
+                new ErrorResponse()
             {
-                Message = context.Exception.Message,
-                StackTrace = context.Exception.StackTrace
-            };
-
-            context.Result = new ObjectResult(response)
+                Code = ex.Code,
+                Message = ex.Message,
+                StackTrace = ex.StackTrace
+            })
             {
                 StatusCode = 500,
                 DeclaredType = typeof(ErrorResponse)
@@ -25,6 +27,7 @@ namespace Repart.Common.Exceptions
 
     public class ErrorResponse
     {
+        public string Code { get; set; }
         public string Message { get; set; }
         public string StackTrace { get; set; }
     }
