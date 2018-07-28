@@ -23,7 +23,7 @@ namespace Repart.Services.Identity.Services
             var roles = new List<string>
             {
                 "SUPER_ADMIN",
-                "GESTION_UTILISATEUR", "CONSULTATION_UTILISATEUR",
+                "GESTION_UTILISATEUR", "CREER_UTILISATEUR", "CONSULTATION_UTILISATEUR",
                 "GESTION_INTERVENANT", "CONSULTATION_INTERVENANT",
                 "GESTION_FORMATION", "CONSULTATION_FORMATION",
             };
