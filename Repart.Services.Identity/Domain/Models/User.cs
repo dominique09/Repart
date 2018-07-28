@@ -79,7 +79,7 @@ namespace Repart.Services.Identity.Domain.Models
                 throw new RepartException("empty_user_password",
                     $"Le mot de passe ne peut pas être vide.");
 
-            Salt = encrypter.GetSalt(password);
+            Salt = encrypter.GetSalt();
             Password = encrypter.GetHash(password, Salt);
         }
 
