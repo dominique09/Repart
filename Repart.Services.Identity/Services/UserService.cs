@@ -68,7 +68,7 @@ namespace Repart.Services.Identity.Services
         public async Task<UserEvent> AddToRole(Guid userId, Guid roleId)
         {
             var user = await FindUser(userId);
-            var role = await FindRole(roleId);
+            await FindRole(roleId);
 
             await _userRepository.ModifyAsync(user.AddRole(roleId));
             return MapUser(user);
