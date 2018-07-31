@@ -15,15 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{2DB81128-B1A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{A06BE1A6-4423-42F5-81CD-9B9497DEFB51}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E927854E-AF7B-404A-A6EB-354D2F03875D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repart.Services.Identity", "Repart.Services.Identity\Repart.Services.Identity.csproj", "{B04602C2-02CC-45EF-B2C9-0EFBB2A83045}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repart.Services.Identity", "Repart.Services.Identity\Repart.Services.Identity.csproj", "{B04602C2-02CC-45EF-B2C9-0EFBB2A83045}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repart.Common", "Repart.Common\Repart.Common.csproj", "{E4757445-E7FC-4D9C-B1BE-D82A1936D4C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repart.Common", "Repart.Common\Repart.Common.csproj", "{E4757445-E7FC-4D9C-B1BE-D82A1936D4C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repart.Services.Identity.Tests", "Repart.Services.Identity.Tests\Repart.Services.Identity.Tests.csproj", "{6C48AED9-78EC-4CF8-B862-F4939F079FF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repart.Services.Identity.Tests", "Repart.Services.Identity.Tests\Repart.Services.Identity.Tests.csproj", "{6C48AED9-78EC-4CF8-B862-F4939F079FF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repart.Services.Formations", "Repart.Services.Formations\Repart.Services.Formations.csproj", "{808FDA04-8E0C-46D0-921F-1E71178EB64A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repart.Services.Formations", "Repart.Services.Formations\Repart.Services.Formations.csproj", "{808FDA04-8E0C-46D0-921F-1E71178EB64A}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2C15BB7D-C5A8-411E-AD26-9DD991B75CAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +31,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E927854E-AF7B-404A-A6EB-354D2F03875D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E927854E-AF7B-404A-A6EB-354D2F03875D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E927854E-AF7B-404A-A6EB-354D2F03875D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E927854E-AF7B-404A-A6EB-354D2F03875D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B04602C2-02CC-45EF-B2C9-0EFBB2A83045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B04602C2-02CC-45EF-B2C9-0EFBB2A83045}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B04602C2-02CC-45EF-B2C9-0EFBB2A83045}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +47,10 @@ Global
 		{808FDA04-8E0C-46D0-921F-1E71178EB64A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{808FDA04-8E0C-46D0-921F-1E71178EB64A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{808FDA04-8E0C-46D0-921F-1E71178EB64A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C15BB7D-C5A8-411E-AD26-9DD991B75CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C15BB7D-C5A8-411E-AD26-9DD991B75CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C15BB7D-C5A8-411E-AD26-9DD991B75CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C15BB7D-C5A8-411E-AD26-9DD991B75CAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

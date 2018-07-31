@@ -1,30 +1,15 @@
-version: '3'
+version: '3.4'
 
 services:
-  start-dependencies:
-    image: dadarek/wait-for-dependencies
-    depends_on:
-      - mongo
-      - rabbitmq
-    command: rabbitmq:5672
+  repart.services.formations:
+    image: ${DOCKER_REGISTRY}repartservicesformations
+    build:
+      context: .
+      dockerfile: Repart.Services.Formations\Dockerfile
 
-  identity-service:
-    build: Repart.Services.Identity
-    links:
-      - rabbitmq
-      - mongo
-    ports:
-      - '5050:5050'
+  repart.services.identity:
+    image: ${DOCKER_REGISTRY}repartservicesidentity
+    build:
+      context: .
+      dockerfile: Repart.Services.Identity\Dockerfile
 
-  mongo:
-    image: mongo
-    volumes:
-      - ./data/db:/data/db
-    ports:
-      - '27017:27017'
-
-  rabbitmq:
-    image: rabbitmq:3.6.5-management
-    ports:
-      - '5672:5672'
-      - '15672:15672'
