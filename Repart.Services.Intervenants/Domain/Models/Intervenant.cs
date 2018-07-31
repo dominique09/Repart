@@ -29,5 +29,14 @@ namespace Repart.Services.Intervenants.Domain.Models
             FormationId = formationId;
             CreatedAt = DateTime.UtcNow;
         }
+
+        public void ChangeFormation(Guid formationId)
+        {
+            if(FormationId == formationId)
+                throw new RepartException("intervenant_already_have_formation",
+                    $"L'intervenant ({Id} possède déjà cette formation ({formationId}).)");
+
+            FormationId = formationId;
+        }
     }
 }
